@@ -64,18 +64,10 @@ Confidence: Certain
 ### Orthanc Explorer
 #### Shodan
 * title:"Orthanc Explorer"
-* port:"4242"
+* "401 Unauthorized" all:"Orthanc Secure Area"
 
 #### Censys
 * 443.https.get.title: "Orthanc Explorer"
-
-### Orthanc DICOM Server
-#### Shodan
-* http.title:"Orthanc - Dicom Server"
-* http.favicon.hash:-478834633
-
-#### Censys
-* 443.https.get.title: "Orthanc - Dicom Server"
 
 ## EBM Technologies
 Confidence: Certain
