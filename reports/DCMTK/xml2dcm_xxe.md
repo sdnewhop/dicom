@@ -18,4 +18,4 @@ $ xml2dcm xxe.xml xxe.dcm
 3) The result DICOM-file will include the content of `/etc/passwd` file.
 
 ## Information
-The vendor was [informed](./data/Advisory_DCMTK_xml2dcm_xxe.pdf) and vulnerability has  been [fixed](http://git.dcmtk.org/?p=dcmtk.git;a=commit;h=dbe6898efea3ba1dd5c50e34d2d5ccd741ef7a18).
+The vendor was [informed](./data/Advisory_DCMTK_xml2dcm_xxe.pdf) and the vulnerability was [fixed](http://git.dcmtk.org/?p=dcmtk.git;a=commit;h=dbe6898efea3ba1dd5c50e34d2d5ccd741ef7a18).
