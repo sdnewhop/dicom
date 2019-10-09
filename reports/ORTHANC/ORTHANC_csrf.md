@@ -3,7 +3,7 @@
 ORTHANC has official online [demo](https://demo.orthanc-server.com/app/explorer.html)
 
 ## Introduction
-Insecure ORTHANC api provides following methods:
+Insecure ORTHANC api provides the following methods:
 ![Orthanc API](./data/orthanc_api.png)
 
 One of them (`execute-script`) executes Lua commands on the server:
@@ -13,7 +13,7 @@ One of them (`execute-script`) executes Lua commands on the server:
 
 ## CSRF
 
-ORTHANC server provides authentication mechanisms. It doesn’t implement any CSRF attack prevention methods. It allows a remote users to execute the API endpoints via CSRF attack.
+ORTHANC server provides authentication mechanisms. It doesn’t implement any CSRF attack prevention methods. It allows a remote attackers to execute the API endpoints via CSRF attack.
 
 ### STEPS TO REPRODUCE
 1. Log in to the web application using a web browser.
@@ -34,7 +34,7 @@ ORTHANC server provides authentication mechanisms. It doesn’t implement any CS
 
 ## Conclusion
 
-The vendor was [informed](./data/Advisory_ORTHANC_CSRF.pdf), and we have received the answer:
+The vendor was [informed](./data/Advisory_ORTHANC_CSRF.pdf), and we received the answer:
 
 about insecure API endpoints:
 ```

@@ -1,8 +1,8 @@
-# ⚕️ Healthcare information security
+# ⚕️ Hacking Medical Imaging with DICOM
 
-Healthcare information security is important because medicine surveys contain sensitive information about patients. Today all healthcare practices store information digitally. Existing technologies, dealing with storing and processing medicine files don’t keep up with or ignore all the modern principles of information security.
+DICOM is the main component of Machine Learning Medical Imaging which is now gaining popularity. [DICOM](https://en.wikipedia.org/wiki/DICOM) (Digital Imaging and communication in Medicine) a data format and a protocol for exchanging between various components, such as [PACS](https://en.wikipedia.org/wiki/Picture_archiving_and_communication_system), DICOM Viewer, Machine Learning Pipeline.
 
-This research's goal is to draw attention to healthcare information security. We researching security aspects some of the [popular tools](./docs/census.md) for working with [DICOM](https://en.wikipedia.org/wiki/DICOM) files.
+We research the security aspects of some of the [popular tools](./docs/census.md) for working with DICOM files.
 
 ## Found vulnerabilities:
 1. [ORTHANC](./reports/ORTHANC/reports.md)
