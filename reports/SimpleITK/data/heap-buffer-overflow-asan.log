@@ -1,0 +1,135 @@
+=================================================================
+==32360==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x7ff43db7d800 at pc 0x000000502bcc bp 0x7fff40582b30 sp 0x7fff405822e0
+WRITE of size 524288 at 0x7ff43db7d800 thread T0
+    #0 0x502bcb in __asan_memcpy (/home/masha/DicomSeriesReader+0x502bcb)
+    #1 0x319ef1d in gdcm::RAWCodec::DecodeBytes(char const*, unsigned long, char*, unsigned long) /home/masha/BUIDSHIT/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/MediaStorageAndFileFormat/gdcmRAWCodec.cxx
+    #2 0x2fa942d in gdcm::Bitmap::TryRAWCodec(char*, bool&) const /home/masha/BUIDSHIT/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/MediaStorageAndFileFormat/gdcmBitmap.cxx:344:20
+    #3 0x2fb092d in gdcm::Bitmap::GetBufferInternal(char*, bool&) const /home/masha/BUIDSHIT/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/MediaStorageAndFileFormat/gdcmBitmap.cxx:902:28
+    #4 0x2fb4a51 in gdcm::Bitmap::GetBuffer(char*) const /home/masha/BUIDSHIT/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/MediaStorageAndFileFormat/gdcmBitmap.cxx:896:10
+    #5 0x2f51f11 in itk::GDCMImageIO::Read(void*) /home/masha/BUIDSHIT/ITK/Modules/IO/GDCM/src/itkGDCMImageIO.cxx:231:15
+    #6 0x2575e3c in itk::ImageFileReader<itk::Image<unsigned char, 3u>, itk::DefaultConvertPixelTraits<unsigned char> >::GenerateData() /home/masha/BUIDSHIT/ITK-prefix/include/ITK-4.13/itkImageFileReader.hxx:460:18
+    #7 0x6019b14 in itk::ProcessObject::UpdateOutputData(itk::DataObject*) /home/masha/BUIDSHIT/ITK/Modules/Core/Common/src/itkProcessObject.cxx:1776:11
+    #8 0x60583af in itk::DataObject::UpdateOutputData() /home/masha/BUIDSHIT/ITK/Modules/Core/Common/src/itkDataObject.cxx:416:17
+    #9 0x4db01a3 in itk::ImageBase<3u>::UpdateOutputData() /home/masha/BUIDSHIT/ITK/Modules/Core/Common/include/itkImageBase.hxx:297:23
+    #10 0x256814a in itk::ImageSeriesReader<itk::Image<unsigned char, 3u> >::GenerateData() /home/masha/BUIDSHIT/ITK-prefix/include/ITK-4.13/itkImageSeriesReader.hxx:411:23
+    #11 0x6019b14 in itk::ProcessObject::UpdateOutputData(itk::DataObject*) /home/masha/BUIDSHIT/ITK/Modules/Core/Common/src/itkProcessObject.cxx:1776:11
+    #12 0x60583af in itk::DataObject::UpdateOutputData() /home/masha/BUIDSHIT/ITK/Modules/Core/Common/src/itkDataObject.cxx:416:17
+    #13 0x4db01a3 in itk::ImageBase<3u>::UpdateOutputData() /home/masha/BUIDSHIT/ITK/Modules/Core/Common/include/itkImageBase.hxx:297:23
+    #14 0x60158dd in itk::ProcessObject::Update() /home/masha/BUIDSHIT/ITK/Modules/Core/Common/src/itkProcessObject.cxx:1369:31
+    #15 0x255d4b5 in itk::simple::Image itk::simple::ImageSeriesReader::ExecuteInternal<itk::Image<unsigned char, 3u> >(itk::ImageIOBase*) /home/masha/SimpleITK/Code/IO/src/sitkImageSeriesReader.cxx:217:13
+    #16 0x2514337 in itk::simple::Image std::_Bind<itk::simple::Image (itk::simple::ImageSeriesReader::*(itk::simple::ImageSeriesReader*, std::_Placeholder<1>))(itk::ImageIOBase*)>::__call<itk::simple::Image, itk::ImageIOBase*&&, 0ul, 1ul>(std::tuple<itk::ImageIOBase*&&>&&, std::_Index_tuple<0ul, 1ul>) /usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/c++/7.4.0/bits/invoke.h:73:14
+    #17 0x2514337 in itk::simple::Image std::_Bind<itk::simple::Image (itk::simple::ImageSeriesReader::*(itk::simple::ImageSeriesReader*, std::_Placeholder<1>))(itk::ImageIOBase*)>::operator()<itk::ImageIOBase*, itk::simple::Image>(itk::ImageIOBase*&&) /usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/c++/7.4.0/functional:549
+    #18 0x2514337 in std::_Function_handler<itk::simple::Image (itk::ImageIOBase*), std::_Bind<itk::simple::Image (itk::simple::ImageSeriesReader::*(itk::simple::ImageSeriesReader*, std::_Placeholder<1>))(itk::ImageIOBase*)> >::_M_invoke(std::_Any_data const&, itk::ImageIOBase*&&) /usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/c++/7.4.0/bits/std_function.h:301
+    #19 0x24f77af in std::function<itk::simple::Image (itk::ImageIOBase*)>::operator()(itk::ImageIOBase*) const /usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/c++/7.4.0/bits/std_function.h:706:14
+    #20 0x24f77af in itk::simple::ImageSeriesReader::Execute() /home/masha/SimpleITK/Code/IO/src/sitkImageSeriesReader.cxx:174
+    #21 0x540f89 in main /home/masha/SimpleITK/Examples/DicomSeriesReader/DicomSeriesReader.cxx:18:36
+    #22 0x7ff4400e5b96 in __libc_start_main /build/glibc-OTsEL5/glibc-2.27/csu/../csu/libc-start.c:310
+    #23 0x443fe9 in _start (/home/masha/DicomSeriesReader+0x443fe9)
+
+0x7ff43db7d800 is located 0 bytes to the right of 262144-byte region [0x7ff43db3d800,0x7ff43db7d800)
+allocated by thread T0 here:
+    #0 0x53c610 in operator new[](unsigned long) (/home/masha/DicomSeriesReader+0x53c610)
+    #1 0x5b434d4 in itk::ImportImageContainer<unsigned long, unsigned char>::AllocateElements(unsigned long, bool) const /home/masha/BUIDSHIT/ITK-prefix/include/ITK-4.13/itkImportImageContainer.hxx:188:14
+    #2 0x5b41ad0 in itk::ImportImageContainer<unsigned long, unsigned char>::Reserve(unsigned long, bool) /home/masha/BUIDSHIT/ITK-prefix/include/ITK-4.13/itkImportImageContainer.hxx:90:29
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/masha/DicomSeriesReader+0x502bcb) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0fff07b67ab0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fff07b67ac0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fff07b67ad0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fff07b67ae0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fff07b67af0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0fff07b67b00:[fa]fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fff07b67b10: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fff07b67b20: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fff07b67b30: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fff07b67b40: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fff07b67b50: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==32360==ABORTING
+masha@infinity-desktop:~$ ./DicomSeriesReader heap-overflow.dcm > heap-buffer-overflow-asan.log
+=================================================================
+==32403==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x7f43eb14b800 at pc 0x000000502bcc bp 0x7ffcd1c02b10 sp 0x7ffcd1c022c0
+WRITE of size 524288 at 0x7f43eb14b800 thread T0
+    #0 0x502bcb in __asan_memcpy (/home/masha/DicomSeriesReader+0x502bcb)
+    #1 0x319ef1d in gdcm::RAWCodec::DecodeBytes(char const*, unsigned long, char*, unsigned long) /home/masha/BUIDSHIT/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/MediaStorageAndFileFormat/gdcmRAWCodec.cxx
+    #2 0x2fa942d in gdcm::Bitmap::TryRAWCodec(char*, bool&) const /home/masha/BUIDSHIT/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/MediaStorageAndFileFormat/gdcmBitmap.cxx:344:20
+    #3 0x2fb092d in gdcm::Bitmap::GetBufferInternal(char*, bool&) const /home/masha/BUIDSHIT/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/MediaStorageAndFileFormat/gdcmBitmap.cxx:902:28
+    #4 0x2fb4a51 in gdcm::Bitmap::GetBuffer(char*) const /home/masha/BUIDSHIT/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/MediaStorageAndFileFormat/gdcmBitmap.cxx:896:10
+    #5 0x2f51f11 in itk::GDCMImageIO::Read(void*) /home/masha/BUIDSHIT/ITK/Modules/IO/GDCM/src/itkGDCMImageIO.cxx:231:15
+    #6 0x2575e3c in itk::ImageFileReader<itk::Image<unsigned char, 3u>, itk::DefaultConvertPixelTraits<unsigned char> >::GenerateData() /home/masha/BUIDSHIT/ITK-prefix/include/ITK-4.13/itkImageFileReader.hxx:460:18
+    #7 0x6019b14 in itk::ProcessObject::UpdateOutputData(itk::DataObject*) /home/masha/BUIDSHIT/ITK/Modules/Core/Common/src/itkProcessObject.cxx:1776:11
+    #8 0x60583af in itk::DataObject::UpdateOutputData() /home/masha/BUIDSHIT/ITK/Modules/Core/Common/src/itkDataObject.cxx:416:17
+    #9 0x4db01a3 in itk::ImageBase<3u>::UpdateOutputData() /home/masha/BUIDSHIT/ITK/Modules/Core/Common/include/itkImageBase.hxx:297:23
+    #10 0x256814a in itk::ImageSeriesReader<itk::Image<unsigned char, 3u> >::GenerateData() /home/masha/BUIDSHIT/ITK-prefix/include/ITK-4.13/itkImageSeriesReader.hxx:411:23
+    #11 0x6019b14 in itk::ProcessObject::UpdateOutputData(itk::DataObject*) /home/masha/BUIDSHIT/ITK/Modules/Core/Common/src/itkProcessObject.cxx:1776:11
+    #12 0x60583af in itk::DataObject::UpdateOutputData() /home/masha/BUIDSHIT/ITK/Modules/Core/Common/src/itkDataObject.cxx:416:17
+    #13 0x4db01a3 in itk::ImageBase<3u>::UpdateOutputData() /home/masha/BUIDSHIT/ITK/Modules/Core/Common/include/itkImageBase.hxx:297:23
+    #14 0x60158dd in itk::ProcessObject::Update() /home/masha/BUIDSHIT/ITK/Modules/Core/Common/src/itkProcessObject.cxx:1369:31
+    #15 0x255d4b5 in itk::simple::Image itk::simple::ImageSeriesReader::ExecuteInternal<itk::Image<unsigned char, 3u> >(itk::ImageIOBase*) /home/masha/SimpleITK/Code/IO/src/sitkImageSeriesReader.cxx:217:13
+    #16 0x2514337 in itk::simple::Image std::_Bind<itk::simple::Image (itk::simple::ImageSeriesReader::*(itk::simple::ImageSeriesReader*, std::_Placeholder<1>))(itk::ImageIOBase*)>::__call<itk::simple::Image, itk::ImageIOBase*&&, 0ul, 1ul>(std::tuple<itk::ImageIOBase*&&>&&, std::_Index_tuple<0ul, 1ul>) /usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/c++/7.4.0/bits/invoke.h:73:14
+    #17 0x2514337 in itk::simple::Image std::_Bind<itk::simple::Image (itk::simple::ImageSeriesReader::*(itk::simple::ImageSeriesReader*, std::_Placeholder<1>))(itk::ImageIOBase*)>::operator()<itk::ImageIOBase*, itk::simple::Image>(itk::ImageIOBase*&&) /usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/c++/7.4.0/functional:549
+    #18 0x2514337 in std::_Function_handler<itk::simple::Image (itk::ImageIOBase*), std::_Bind<itk::simple::Image (itk::simple::ImageSeriesReader::*(itk::simple::ImageSeriesReader*, std::_Placeholder<1>))(itk::ImageIOBase*)> >::_M_invoke(std::_Any_data const&, itk::ImageIOBase*&&) /usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/c++/7.4.0/bits/std_function.h:301
+    #19 0x24f77af in std::function<itk::simple::Image (itk::ImageIOBase*)>::operator()(itk::ImageIOBase*) const /usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/c++/7.4.0/bits/std_function.h:706:14
+    #20 0x24f77af in itk::simple::ImageSeriesReader::Execute() /home/masha/SimpleITK/Code/IO/src/sitkImageSeriesReader.cxx:174
+    #21 0x540f89 in main /home/masha/SimpleITK/Examples/DicomSeriesReader/DicomSeriesReader.cxx:18:36
+    #22 0x7f43ed69fb96 in __libc_start_main /build/glibc-OTsEL5/glibc-2.27/csu/../csu/libc-start.c:310
+    #23 0x443fe9 in _start (/home/masha/DicomSeriesReader+0x443fe9)
+
+0x7f43eb14b800 is located 0 bytes to the right of 262144-byte region [0x7f43eb10b800,0x7f43eb14b800)
+allocated by thread T0 here:
+    #0 0x53c610 in operator new[](unsigned long) (/home/masha/DicomSeriesReader+0x53c610)
+    #1 0x5b434d4 in itk::ImportImageContainer<unsigned long, unsigned char>::AllocateElements(unsigned long, bool) const /home/masha/BUIDSHIT/ITK-prefix/include/ITK-4.13/itkImportImageContainer.hxx:188:14
+    #2 0x5b41ad0 in itk::ImportImageContainer<unsigned long, unsigned char>::Reserve(unsigned long, bool) /home/masha/BUIDSHIT/ITK-prefix/include/ITK-4.13/itkImportImageContainer.hxx:90:29
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/masha/DicomSeriesReader+0x502bcb) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0fe8fd6216b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fe8fd6216c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fe8fd6216d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fe8fd6216e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fe8fd6216f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0fe8fd621700:[fa]fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe8fd621710: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe8fd621720: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe8fd621730: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe8fd621740: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe8fd621750: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==32403==ABORTING
