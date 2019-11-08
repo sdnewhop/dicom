@@ -1,0 +1,86 @@
+=================================================================
+==32465==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7ffddb5faf70 at pc 0x0000004d501c bp 0x7ffddb5f9bb0 sp 0x7ffddb5f9360
+WRITE of size 701 at 0x7ffddb5faf70 thread T0
+    #0 0x4d501b in __interceptor_strcpy.part.245 (/home/masha/DicomSeriesReader+0x4d501b)
+    #1 0x2f5f1fc in itk::GDCMImageIO::GetPatientName(char*) /home/masha/BUIDSHIT/ITK/Modules/IO/GDCM/src/itkGDCMImageIO.cxx:1244:3
+    #2 0x2f579f9 in itk::GDCMImageIO::InternalReadImageInformation() /home/masha/BUIDSHIT/ITK/Modules/IO/GDCM/src/itkGDCMImageIO.cxx:614:9
+    #3 0x2db3773 in itk::simple::ImageReaderBase::GetImageIOBase(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /home/masha/SimpleITK/Code/IO/src/sitkImageReaderBase.cxx:119:11
+    #4 0x24f6feb in itk::simple::ImageSeriesReader::Execute() /home/masha/SimpleITK/Code/IO/src/sitkImageSeriesReader.cxx:138:47
+    #5 0x540f89 in main /home/masha/SimpleITK/Examples/DicomSeriesReader/DicomSeriesReader.cxx:18:36
+    #6 0x7fc9a4dd8b96 in __libc_start_main /build/glibc-OTsEL5/glibc-2.27/csu/../csu/libc-start.c:310
+    #7 0x443fe9 in _start (/home/masha/DicomSeriesReader+0x443fe9)
+
+Address 0x7ffddb5faf70 is located in stack of thread T0 at offset 4784 in frame
+    #0 0x2f541ff in itk::GDCMImageIO::InternalReadImageInformation() /home/masha/BUIDSHIT/ITK/Modules/IO/GDCM/src/itkGDCMImageIO.cxx:273
+
+  This frame has 35 object(s):
+    [32, 40) '__dnew.i.i.i.i957'
+    [64, 65) 'sep.i.i731'
+    [80, 88) '__dnew.i.i.i.i686'
+    [112, 113) 'sep.i.i'
+    [128, 136) '__dnew.i.i.i.i'
+    [160, 680) 'inputFileStream' (line 275)
+    [816, 856) 'reader' (line 283)
+    [896, 1272) 'message' (line 287)
+    [1344, 1360) 'e_' (line 287)
+    [1376, 1408) 'ref.tmp' (line 287)
+    [1440, 1816) 'message29' (line 331)
+    [1888, 1904) 'e_39' (line 331)
+    [1920, 1952) 'ref.tmp40' (line 331)
+    [1984, 2040) 'r' (line 336)
+    [2080, 2456) 'message58' (line 381)
+    [2528, 2544) 'e_68' (line 381)
+    [2560, 2592) 'ref.tmp69' (line 381)
+    [2624, 2648) 'spacing' (line 410)
+    [2688, 2692) 'ms' (line 418)
+    [2704, 2728) 'de' (line 437)
+    [2768, 3160) 'm_Ss' (line 446)
+    [3232, 3264) 's' (line 453)
+    [3296, 3688) 'm_Ss119' (line 471)
+    [3760, 3792) 's124' (line 478)
+    [3824, 3840) 'rowDirection' (line 529)
+    [3856, 3872) 'columnDirection' (line 529)
+    [3888, 3904) 'sliceDirection' (line 538)
+    [3920, 3936) 'ref.tmp196' (line 542)
+    [3952, 3968) 'ref.tmp199' (line 543)
+    [3984, 3992) 'sf' (line 556)
+    [4016, 4048) 'encodedValue' (line 595)
+    [4080, 4112) 'ref.tmp252' (line 596)
+    [4144, 4176) 'ref.tmp256' (line 606)
+    [4208, 4240) 'ref.tmp257' (line 606)
+    [4272, 4784) 'name' (line 613) <== Memory access at offset 4784 overflows this variable
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism or swapcontext
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow (/home/masha/DicomSeriesReader+0x4d501b) in __interceptor_strcpy.part.245
+Shadow bytes around the buggy address:
+  0x10003b6b7590: f8 f8 f2 f2 f2 f2 f8 f8 f8 f8 f2 f2 f2 f2 f8 f8
+  0x10003b6b75a0: f8 f8 f2 f2 f2 f2 f8 f8 f8 f8 f2 f2 f2 f2 00 00
+  0x10003b6b75b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10003b6b75c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10003b6b75d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x10003b6b75e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00[f3]f3
+  0x10003b6b75f0: f3 f3 f3 f3 f3 f3 f3 f3 00 00 00 00 00 00 00 00
+  0x10003b6b7600: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10003b6b7610: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10003b6b7620: 00 00 00 00 00 00 00 00 f1 f1 f1 f1 f8 f2 f2 f2
+  0x10003b6b7630: f8 f2 f2 f2 f8 f2 f2 f2 f8 f2 f2 f2 f8 f2 f2 f2
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==32465==ABORTING
