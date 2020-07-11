@@ -1,0 +1,54 @@
+=================================================================
+==10406==ERROR: AddressSanitizer: global-buffer-overflow on address 0x000000924a28 at pc 0x000000848ec7 bp 0x7fffa12327c0 sp 0x7fffa12327b8
+READ of size 8 at 0x000000924a28 thread T0
+    #0 0x848ec6  (/home/vagrant/fuzzing/dcmtk/build/bin/xml2dcm+0x848ec6)
+    #1 0x68b336  (/home/vagrant/fuzzing/dcmtk/build/bin/xml2dcm+0x68b336)
+    #2 0x68ad77  (/home/vagrant/fuzzing/dcmtk/build/bin/xml2dcm+0x68ad77)
+    #3 0x561b43  (/home/vagrant/fuzzing/dcmtk/build/bin/xml2dcm+0x561b43)
+    #4 0x55d8ff  (/home/vagrant/fuzzing/dcmtk/build/bin/xml2dcm+0x55d8ff)
+    #5 0x55ab6c  (/home/vagrant/fuzzing/dcmtk/build/bin/xml2dcm+0x55ab6c)
+    #6 0x557d39  (/home/vagrant/fuzzing/dcmtk/build/bin/xml2dcm+0x557d39)
+    #7 0x436db7  (/home/vagrant/fuzzing/dcmtk/build/bin/xml2dcm+0x436db7)
+    #8 0x42724a  (/home/vagrant/fuzzing/dcmtk/build/bin/xml2dcm+0x42724a)
+    #9 0x432210  (/home/vagrant/fuzzing/dcmtk/build/bin/xml2dcm+0x432210)
+    #10 0x4208f2  (/home/vagrant/fuzzing/dcmtk/build/bin/xml2dcm+0x4208f2)
+    #11 0x7f3dd3a18b96  (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+    #12 0x424f89  (/home/vagrant/fuzzing/dcmtk/build/bin/xml2dcm+0x424f89)
+
+0x000000924a28 is located 56 bytes to the left of global variable '<string literal>' defined in '/home/vagrant/fuzzing/dcmtk/ofstd/libsrc/ofstd.cc:2039:16' (0x924a60) of size 11
+  '<string literal>' is ascii string 'here %lf
+'
+0x000000924a28 is located 0 bytes to the right of global variable 'atof_powersOf10' defined in '/home/vagrant/fuzzing/dcmtk/ofstd/libsrc/ofstd.cc:1856:21' (0x9249e0) of size 72
+SUMMARY: AddressSanitizer: global-buffer-overflow (/home/vagrant/fuzzing/dcmtk/build/bin/xml2dcm+0x848ec6)
+Shadow bytes around the buggy address:
+  0x00008011c8f0: f9 f9 f9 f9 07 f9 f9 f9 f9 f9 f9 f9 03 f9 f9 f9
+  0x00008011c900: f9 f9 f9 f9 02 f9 f9 f9 f9 f9 f9 f9 00 00 00 00
+  0x00008011c910: 00 00 00 00 01 f9 f9 f9 f9 f9 f9 f9 00 00 00 00
+  0x00008011c920: 00 00 00 00 00 00 f9 f9 f9 f9 f9 f9 00 06 f9 f9
+  0x00008011c930: f9 f9 f9 f9 00 03 f9 f9 f9 f9 f9 f9 00 00 00 00
+=>0x00008011c940: 00 00 00 00 00[f9]f9 f9 f9 f9 f9 f9 00 03 f9 f9
+  0x00008011c950: f9 f9 f9 f9 04 f9 f9 f9 f9 f9 f9 f9 05 f9 f9 f9
+  0x00008011c960: f9 f9 f9 f9 04 f9 f9 f9 f9 f9 f9 f9 04 f9 f9 f9
+  0x00008011c970: f9 f9 f9 f9 00 f9 f9 f9 f9 f9 f9 f9 00 00 f9 f9
+  0x00008011c980: f9 f9 f9 f9 05 f9 f9 f9 f9 f9 f9 f9 00 00 00 06
+  0x00008011c990: f9 f9 f9 f9 00 00 05 f9 f9 f9 f9 f9 00 01 f9 f9
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==10406==ABORTING
